@@ -6,25 +6,36 @@ Patches for xenomai &amp; Robert C Nelson Kernel for Xenomai
 Installation steps:
 1) Get Robert C Nelson Kernel first - tag v3.13-bone5 from
 	git://github.com/RobertCNelson/linux-dev.git
+
 2) Get Xenomai master from git://git.xenomai.org/xenomai-2.6.git
+
 3) Build default Robert C Nelson kernel running the script build\_kernel.sh 
 	(this will download all the required tools, sources, patches etc.) and 
 	go to subdirectory KERNEL
+
 4) checkout v3.13-bone5 kernel from Robert's repo - git checkout v3.13-bone5
+
 5) apply patch  	v3.13-bone5\_ipipe.patch.gz 
 	zcat v3.13-bone5\_ipipe.patch.gz | patch -p1
+
 6) copy/overwrite default\_xeno\_beagle.config to .config &amp; .config.old - 
 	the config includes only basic drivers & has all debug enabled I wanted.
 	When somebody wishes to change it please change the settings concerning
 	debugging. Warning!!! Ipipe debugging/tracing options seem to be _very_
 	expensive in CPU time.
+
 7) rebuild &amp; install the kernel in BBB (there are various places where it
 	is described).
+
 8) got to Xenomai directory
+
 9) apply patch xenomai-2.6.3\_master\_3.13.patch.gz to xenomai 
 	cd ${XENO_DIR}; zcat xenomai-2.6.3\_master\_3.13.patch.gz | patch -p1
+
 10) installa xenomai as usual: ./scripts/prepare-kernel.sh --kernel=${RCNKernelPath}, etc...
-11) test & eventually enjoy (surely moderately, because there are some serious flaws).
+
+11) test & eventually enjoy (surely moderately, because there are some serious
+	flaws and generat quality is at most alpha).
 
 The flaws:
 1) the version is completely unsupported by Xenomai or IPIPE teams! Please
