@@ -1,0 +1,388 @@
+root@bbb-tadek:/usr/xenomai/bin# ./xeno-regression-test
+Started child 22939: /bin/sh /usr/xenomai/bin/xeno-test-run-wrapper ./xeno-regression-test
+++ echo 0
+++ /usr/xenomai/bin/arith
+mul: 0x79364d93, shft: 26
+integ: 30, frac: 0x4d9364d9364d9364
+
+signed positive operation: 0x03ffffffffffffff * 1000000000 / 33000000
+inline calibration: 0x0000000000000000: 199.987 ns, rejected 15/10000
+inlined llimd: 0x79364d9364d9362f: 1050.525 ns, rejected 92/10000
+inlined llmulshft: 0x79364d92ffffffe1: 30.279 ns, rejected 11/10000
+inlined nodiv_llimd: 0x79364d9364d9362f: 46.883 ns, rejected 21/10000
+out of line calibration: 0x0000000000000000: 200.287 ns, rejected 24/10000
+out of line llimd: 0x79364d9364d9362f: 1060.316 ns, rejected 122/10000
+out of line llmulshft: 0x79364d92ffffffe1: 31.054 ns, rejected 24/10000
+out of line nodiv_llimd: 0x79364d9364d9362f: 51.891 ns, rejected 29/10000
+
+signed negative operation: 0xfc00000000000001 * 1000000000 / 33000000
+inline calibration: 0x0000000000000000: 199.879 ns, rejected 22/10000
+inlined llimd: 0x86c9b26c9b26c9d1: 1107.345 ns, rejected 139/10000
+inlined llmulshft: 0x86c9b26d0000001e: 30.187 ns, rejected 19/10000
+inlined nodiv_llimd: 0x86c9b26c9b26c9d1: 50.233 ns, rejected 30/10000
+out of line calibration: 0x0000000000000000: 200.058 ns, rejected 24/10000
+out of line llimd: 0x86c9b26c9b26c9d1: 1074.800 ns, rejected 132/10000
+out of line llmulshft: 0x86c9b26d0000001e: 30.983 ns, rejected 24/10000
+out of line nodiv_llimd: 0x86c9b26c9b26c9d1: 62.125 ns, rejected 27/10000
+
+unsigned operation: 0x03ffffffffffffff * 1000000000 / 33000000
+inline calibration: 0x0000000000000000: 199.983 ns, rejected 26/10000
+inlined nodiv_ullimd: 0x79364d9364d9362f: 46.891 ns, rejected 29/10000
+out of line calibration: 0x0000000000000000: 201.179 ns, rejected 18/10000
+out of line nodiv_ullimd: 0x79364d9364d9362f: 49.816 ns, rejected 27/10000
+++ /usr/xenomai/bin/clocktest -C 42 -T 30
+== Tested clock: 42 (CLOCK_HOST_REALTIME)
+CPU      ToD offset [us] ToD drift [us/s]      warps max delta [us]
+--- -------------------- ---------------- ---------- --------------
+  0                  1.5            0.006          0            0.0
+++ /usr/xenomai/bin/clocktest -T 30
+== Tested clock: 0 (CLOCK_REALTIME)
+CPU      ToD offset [us] ToD drift [us/s]      warps max delta [us]
+--- -------------------- ---------------- ---------- --------------
+  0  -1393170691790038.2            0.005          0            0.0
+++ /usr/xenomai/bin/cond-torture-native
+simple_condwait
+relative_condwait
+absolute_condwait
+sig_norestart_condwait
+sig_restart_condwait
+sig_norestart_condwait_mutex
+sig_restart_condwait_mutex
+sig_norestart_double
+sig_restart_double
+cond_destroy_whilewait
+Test OK
+++ /usr/xenomai/bin/cond-torture-posix
+simple_condwait
+relative_condwait
+absolute_condwait
+sig_norestart_condwait
+sig_restart_condwait
+sig_norestart_condwait_mutex
+sig_restart_condwait_mutex
+sig_norestart_double
+sig_restart_double
+cond_destroy_whilewait
+Test OK
+++ /usr/xenomai/bin/mutex-torture-native
+simple_wait
+recursive_wait
+timed_mutex
+mode_switch
+pi_wait
+lock_stealing
+NOTE: lock_stealing mutex_trylock: not supported
+deny_stealing
+simple_condwait
+recursive_condwait
+auto_switchback
+Test OK
+++ /usr/xenomai/bin/mutex-torture-posix
+simple_wait
+recursive_wait
+errorcheck_wait
+timed_mutex
+mode_switch
+pi_wait
+lock_stealing
+NOTE: lock_stealing mutex_trylock: not supported
+deny_stealing
+simple_condwait
+recursive_condwait
+auto_switchback
+Test OK
+++ /usr/xenomai/bin/regression/posix/leaks
+Checking for leaks in posix skin objects
+thread: OK
+mutex: OK
+cond: OK
+sem: OK
+named sem: OK
+timer: OK
+shm: OK
+mq: OK
+++ /usr/xenomai/bin/regression/posix/mprotect
+memory read
+memory write after exec enable
+memory write after write enable
+memory read/write after access enable
+Test OK
+++ /usr/xenomai/bin/regression/posix/nano_test
+Test OK
+++ /usr/xenomai/bin/regression/posix/shm
+Checking posix skin shared memories
+posix skin shared memories: success
+++ /usr/xenomai/bin/regression/posix/xddp_test
+Test OK
+++ /usr/xenomai/bin/regression/posix/test_pip_exit
+Test OK
+++ /usr/xenomai/bin/regression/native/heap
+Checking native skin shared heaps
+native skin shared heaps: success
+++ /usr/xenomai/bin/regression/native/leaks
+Checking for leaks in native skin services
+alarm: OK
+buffer: OK
+cond: OK
+event: OK
+heap: OK
+mutex: OK
+pipe: OK
+queue: OK
+sem: OK
+task: OK
+++ /usr/xenomai/bin/regression/native/sigdebug
+mayday page starting at 0xb6fc6000 [/dev/rtheap]
+mayday code: 0c 00 9f e5 0c 70 9f e5 00 00 00 ef 00 00 a0 e3 00 00 80 e5 2b 02 00 0a 42 00 0f 00 48 80 9b c0
+mlockall
+syscall
+signal
+relaxed mutex owner
+page fault
+watchdog
+Test OK
+++ /usr/xenomai/bin/regression/native+posix/mq_select
+Checking select service with posix message queues
+Received Surfing With The Alien
+Received Lords of Karma
+Received Banana Mango
+Received Psycho Monkey
+Received Luminous Flesh Giants
+Received Moroccan Sunset
+Received Satch Boogie
+Received Flying In A Blue Dream
+Received Ride
+Received Summer Song
+Received Speed Of Light
+Received Crystal Planet
+Received Raspberry Jam Delta-V
+Received Champagne?
+Received Clouds Race Across The Sky
+Received Engines Of Creation
+select service with posix message queues: success
+++ start_load
+++ echo start_load
+++ check_alive /usr/xenomai/bin/switchtest
+++ echo check_alive /usr/xenomai/bin/switchtest
+++ check_alive /usr/xenomai/bin/switchtest -s 1000
+++ echo check_alive /usr/xenomai/bin/switchtest -s 1000
+++ check_alive /usr/xenomai/bin/latency
+Started child 26718: dohell 900
+++ echo check_alive /usr/xenomai/bin/latency
+++ wait_load
+Started child 26720: /usr/xenomai/bin/switchtest
+++ read rc
+Started child 26721: /usr/xenomai/bin/switchtest -s 1000
+Started child 26723: /usr/xenomai/bin/latency
+== Sampling period: 1000 us
+== Test mode: periodic user-mode task
+== All results in microseconds
+warming up...
+== Testing FPU check routines...
+d0: 1 != 2
+d1: 1 != 2
+d2: 1 != 2
+d3: 1 != 2
+d4: 1 != 2
+d5: 1 != 2
+d6: 1 != 2
+d7: 1 != 2
+d8: 1 != 2
+d9: 1 != 2
+d10: 1 != 2
+d11: 1 != 2
+d12: 1 != 2
+d13: 1 != 2
+d14: 1 != 2
+d15: 1 != 2
+== FPU check routines: OK.
+== Testing FPU check routines...
+d0: 1 != 2
+d1: 1 != 2
+d2: 1 != 2
+d3: 1 != 2
+d4: 1 != 2
+d5: 1 != 2
+d6: 1 != 2
+d7: 1 != 2
+d8: 1 != 2
+d9: 1 != 2
+d10: 1 != 2
+d11: 1 != 2
+d12: 1 != 2
+d13: 1 != 2
+d14: 1 != 2
+d15: 1 != 2
+== FPU check routines: OK.
+== Threads: switcher_ufps0-0 rtk0-1 rtk0-2 rtk_fp0-3 rtk_fp0-4 rtk_fp_ufpp0-5 rtk_fp_ufpp0-6 rtup0-7 rtup0-8 rtup_ufpp0-9 rtup_ufpp0-10 rtus0-11 rtus0-12 rtus_ufps0-13 rtus_ufps0-14 rtuo0-15 rtuo0-16 rtuo_ufpp0-17 rtuo_ufpp0-18 rtuo_ufps0-19 rtuo_ufps0-20 rtuo_ufpp_ufps0-21 rtuo_ufpp_ufps0-22 fpu_stress_ufps0-23
+== Threads: sleeper_ufps0-0 rtk0-1 rtk0-2 rtk_fp0-3 rtk_fp0-4 rtk_fp_ufpp0-5 rtk_fp_ufpp0-6 rtup0-7 rtup0-8 rtup_ufpp0-9 rtup_ufpp0-10 rtus0-11 rtus0-12 rtus_ufps0-13 rtus_ufps0-14 rtuo0-15 rtuo0-16 rtuo_ufpp0-17 rtuo_ufpp0-18 rtuo_ufps0-19 rtuo_ufps0-20 rtuo_ufpp_ufps0-21 rtuo_ufpp_ufps0-22
+RTT|  00:00:01
+RTH|---------cpu|ctx switches|-------total
+RTD|           0|       16144|       16144
+RTT|  00:00:01
+RTH|---------cpu|ctx switches|-------total
+RTD|           0|         895|         895
+RTT|  00:00:01  (periodic user-mode task, 1000 us period, priority 99)
+RTH|----lat min|----lat avg|----lat max|-overrun|---msw|---lat best|--lat worst
+RTD|      9.249|     19.499|     34.499|       0|     0|      9.249|     34.499
+RTD|           0|       16215|       32359
+RTD|           0|         897|        1792
+RTD|      9.333|     19.833|     37.916|       0|     0|      9.249|     37.916
+RTD|           0|       16146|       48505
+RTD|           0|         897|        2689
+RTD|      8.958|     19.749|     33.124|       0|     0|      8.958|     37.916
+RTD|           0|       16150|       64655
+RTD|           0|         897|        3586
+RTD|      9.791|     19.916|     31.208|       0|     0|      8.958|     37.916
+RTD|           0|       16144|       80799
+RTD|           0|         897|        4483
+RTD|      9.124|     19.874|     36.166|       0|     0|      8.958|     37.916
+RTD|           0|       16213|       97012
+RTD|           0|         897|        5380
+RTD|      8.958|     19.958|     32.999|       0|     0|      8.958|     37.916
+RTD|           0|       16146|      113158
+RTD|           0|         897|        6277
+RTD|      8.333|     19.916|     35.541|       0|     0|      8.333|     37.916
+RTD|           0|       16148|      129306
+RTD|           0|         897|        7174
+RTD|      8.083|     18.791|     35.541|       0|     0|      8.083|     37.916
+RTD|           0|         759|        7933
+RTD|      7.999|     17.833|     35.416|       0|     0|      7.999|     37.916
+RTD|           0|         759|        8692
+RTD|      7.958|     17.458|     34.124|       0|     0|      7.958|     37.916
+RTD|           0|         759|        9451
+RTD|      5.791|     17.499|     34.458|       0|     0|      5.791|     37.916
+RTD|           0|         759|       10210
+RTD|      8.083|     17.499|     36.916|       0|     0|      5.791|     37.916
+RTD|           0|         759|       10969
+RTD|      8.083|     17.249|     36.958|       0|     0|      5.791|     37.916
+RTD|           0|         759|       11728
+RTD|      7.791|     17.124|     34.833|       0|     0|      5.791|     37.916
+RTD|           0|         761|       12489
+RTD|      7.958|     17.374|     33.541|       0|     0|      5.791|     37.916
+RTD|           0|         759|       13248
+RTD|      6.583|     17.249|     39.208|       0|     0|      5.791|     39.208
+RTD|           0|         757|       14005
+RTD|      8.041|     17.291|     37.124|       0|     0|      5.791|     39.208
+RTD|           0|         690|       14695
+RTD|      8.124|     17.208|     37.708|       0|     0|      5.791|     39.208
+RTD|           0|         759|       15454
+RTD|      8.083|     17.166|     35.374|       0|     0|      5.791|     39.208
+RTD|           0|         759|       16213
+RTD|      8.166|     17.416|     35.166|       0|     0|      5.791|     39.208
+RTD|           0|         692|       16905
+RTD|      7.666|     17.124|     33.249|       0|     0|      5.791|     39.208
+RTT|  00:00:22
+RTH|---------cpu|ctx switches|-------total
+RTD|           0|         759|       17664
+RTT|  00:00:22  (periodic user-mode task, 1000 us period, priority 99)
+RTH|----lat min|----lat avg|----lat max|-overrun|---msw|---lat best|--lat worst
+RTD|      8.083|     17.083|     32.499|       0|     0|      5.791|     39.208
+RTD|           0|         757|       18421
+RTD|      7.874|     17.458|     35.874|       0|     0|      5.791|     39.208
+RTD|           0|         759|       19180
+RTD|      8.166|     17.499|     42.666|       0|     0|      5.791|     42.666
+RTD|           0|         759|       19939
+RTD|      8.083|     17.124|     33.041|       0|     0|      5.791|     42.666
+RTD|      8.083|     17.124|     33.541|       0|     0|      5.791|     42.666
+RTD|           0|         759|       20698
+RTD|      7.666|     17.416|     33.916|       0|     0|      5.791|     42.666
+RTD|           0|         759|       21457
+RTD|      7.666|     17.083|     37.458|       0|     0|      5.791|     42.666
+RTD|           0|         759|       22216
+RTD|      6.749|     17.624|     36.708|       0|     0|      5.791|     42.666
+RTD|           0|         759|       22975
+RTD|      8.166|     16.958|     33.458|       0|     0|      5.791|     42.666
+RTD|           0|         692|       23667
+RTD|      5.708|     17.499|     34.916|       0|     0|      5.708|     42.666
+RTD|           0|         757|       24424
+RTD|      8.124|     17.083|     33.833|       0|     0|      5.708|     42.666
+RTD|           0|         828|       25252
+RTD|      7.874|     17.416|     37.291|       0|     0|      5.708|     42.666
+RTD|           0|         759|       26011
+RTD|      7.999|     17.374|     39.874|       0|     0|      5.708|     42.666
+RTD|           0|         759|       26770
+RTD|      8.083|     17.083|     40.708|       0|     0|      5.708|     42.666
+RTD|           0|         759|       27529
+RTD|      7.958|     17.416|     33.749|       0|     0|      5.708|     42.666
+RTD|           0|         759|       28288
+RTD|      8.166|     17.249|     40.166|       0|     0|      5.708|     42.666
+RTD|           0|         692|       28980
+RTD|      7.041|     17.124|     35.958|       0|     0|      5.708|     42.666
+RTD|           0|         761|       29741
+RTD|      7.916|     17.458|     32.291|       0|     0|      5.708|     42.666
+RTD|           0|         755|       30496
+RTD|      8.083|     17.374|     38.249|       0|     0|      5.708|     42.666
+RTD|           0|         761|       31257
+RTD|      8.041|     17.916|     41.208|       0|     0|      5.708|     42.666
+RTD|           0|         759|       32016
+RTD|      7.958|     17.166|     35.874|       0|     0|      5.708|     42.666
+RTD|           0|         757|       32773
+RTT|  00:00:43  (periodic user-mode task, 1000 us period, priority 99)
+RTH|----lat min|----lat avg|----lat max|-overrun|---msw|---lat best|--lat worst
+RTD|      8.124|     17.624|     32.541|       0|     0|      5.708|     42.666
+RTT|  00:00:44
+RTH|---------cpu|ctx switches|-------total
+RTD|           0|         759|       33532
+RTD|      7.124|     17.583|     42.499|       0|     0|      5.708|     42.666
+RTD|           0|         759|       34291
+RTD|      8.124|     17.416|     38.999|       0|     0|      5.708|     42.666
+RTD|           0|         694|       34985
+RTD|      8.041|     17.624|     48.124|       0|     0|      5.708|     48.124
+RTD|           0|         755|       35740
+RTD|      8.166|     17.249|     37.208|       0|     0|      5.708|     48.124
+RTD|           0|         828|       36568
+RTD|      8.166|     17.499|     32.041|       0|     0|      5.708|     48.124
+RTD|           0|         759|       37327
+RTD|      6.041|     17.583|     32.499|       0|     0|      5.708|     48.124
+RTD|           0|         759|       38086
+RTD|      8.124|     17.041|     33.124|       0|     0|      5.708|     48.124
+RTD|           0|         759|       38845
+RTD|      8.124|     17.916|     40.999|       0|     0|      5.708|     48.124
+RTD|           0|         759|       39604
+RTD|      7.916|     17.124|     34.541|       0|     0|      5.708|     48.124
+RTD|           0|         759|       40363
+RTD|      7.999|     17.458|     35.416|       0|     0|      5.708|     48.124
+RTD|           0|         759|       41122
+RTD|      7.541|     17.333|     33.541|       0|     0|      5.708|     48.124
+RTD|           0|         759|       41881
+RTD|      6.416|     17.499|     32.249|       0|     0|      5.708|     48.124
+RTD|           0|         759|       42640
+RTD|      8.083|     17.333|     38.833|       0|     0|      5.708|     48.124
+RTD|           0|         759|       43399
+RTD|      8.083|     17.249|     32.458|       0|     0|      5.708|     48.124
+RTD|      5.166|     17.249|     34.541|       0|     0|      5.166|     48.124
+RTD|           0|         759|       44158
+RTD|      8.083|     17.291|     36.874|       0|     0|      5.166|     48.124
+RTD|           0|         759|       44917
+RTD|      8.166|     17.583|     32.249|       0|     0|      5.166|     48.124
+RTD|           0|         759|       45676
+RTD|      8.041|     17.499|     34.499|       0|     0|      5.166|     48.124
+RTD|           0|         759|       46435
+RTD|      6.291|     17.416|     34.291|       0|     0|      5.166|     48.124
+RTD|           0|         759|       47194
+RTD|      8.124|     17.749|     50.208|       0|     0|      5.166|     50.208
+RTD|           0|         828|       48022
+RTT|  00:01:04  (periodic user-mode task, 1000 us period, priority 99)
+RTH|----lat min|----lat avg|----lat max|-overrun|---msw|---lat best|--lat worst
+RTD|      8.124|     17.458|     38.583|       0|     0|      5.166|     50.208
+RTD|           0|         759|       48781
+RTD|      8.041|     17.499|     36.333|       0|     0|      5.166|     50.208
+RTT|  00:01:06
+RTH|---------cpu|ctx switches|-------total
+RTD|           0|         759|       49540
+RTD|      7.999|     17.124|     33.791|       0|     0|      5.166|     50.208
+RTD|           0|         759|       50299
+RTD|      7.999|     17.208|     34.374|       0|     0|      5.166|     50.208
+RTD|           0|         759|       51058
+RTD|      6.874|     17.291|     33.416|       0|     0|      5.166|     50.208
+RTD|           0|         759|       51817
+RTD|      5.791|     17.249|     34.458|       0|     0|      5.166|     50.208
+RTD|           0|         759|       52576
+RTD|      8.124|     17.333|     34.458|       0|     0|      5.166|     50.208
+RTD|           0|         690|       53266
+RTD|      8.083|     16.916|     35.708|       0|     0|      5.166|     50.208
+RTD|           0|         759|       54025
+RTD|      7.916|     17.208|     40.583|       0|     0|      5.166|     50.208
+RTD|           0|         694|       54719
+

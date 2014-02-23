@@ -4,38 +4,42 @@ bbb-xenomai-patches
 Patches for xenomai &amp; Robert C Nelson Kernel for Xenomai
 
 Installation steps:
-1) Get Robert C Nelson Kernel first - tag v3.13-bone5 from
+1) Get Robert C Nelson Kernel build environment first - tag v3.13.4-bone5 from
 	git://github.com/RobertCNelson/linux-dev.git
 
 2) Get Xenomai master from git://git.xenomai.org/xenomai-2.6.git
 
 3) Build default Robert C Nelson kernel running the script build\_kernel.sh 
-	(this will download all the required tools, sources, patches etc.) and 
-	go to subdirectory KERNEL
+	(this will download all the required tools, sources, patches etc.).
+	This step is not strictly necessary, because it is sufficient to get the
+	tools and patch the kernel, but building default Robert's kernel guarantees
+	that the all necessary patches will be aplied
 
-4) checkout v3.13-bone5 kernel from Robert's repo - git checkout v3.13-bone5
+4) After the patches were applied in previous step you can give tag to the
+	patched Robert's kernel tree - cd KERNEL; git tag 3.13.4-bone5
 
-5) apply patch  	v3.13-bone5\_ipipe.patch.gz 
-	zcat v3.13-bone5\_ipipe.patch.gz | patch -p1
+5) in directory KERNEL apply patch  	v3.13.4-bone5\_ipipe.patch.gz 
+	zcat v3.13.4-bone5\_ipipe.patch.gz | patch -p1
 
-6) copy/overwrite default\_xeno\_beagle.config to .config &amp; .config.old - 
+6) copy/overwrite right config from repo stored in directory configs/ to
+directory KERNEL overwriting files .config &amp; .config.old - 
 	the config includes only basic drivers & has all debug enabled I wanted.
 	When somebody wishes to change it please change the settings concerning
 	debugging. Warning!!! Ipipe debugging/tracing options seem to be _very_
 	expensive in CPU time.
 
-7) rebuild &amp; install the kernel in BBB (there are various places where it
-	is described).
+7) go to your Xenomai repo from step (2)
 
-8) got to Xenomai directory
-
-9) apply patch xenomai-2.6.3\_master\_3.13.patch.gz to xenomai 
+8) apply patch xenomai-2.6.3\_master\_3.13.patch.gz to xenomai 
 	cd ${XENO_DIR}; zcat xenomai-2.6.3\_master\_3.13.patch.gz | patch -p1
+	
+9) installa xenomai as usual: ./scripts/prepare-kernel.sh --kernel=${RCNKernelPath}, etc...
 
-10) installa xenomai as usual: ./scripts/prepare-kernel.sh --kernel=${RCNKernelPath}, etc...
+10) rebuild &amp; install the kernel in BBB (there are various places where it
+	is described - eewiki is one of those ).
 
 11) test & eventually enjoy (surely moderately, because there are some serious
-	flaws and generat quality is at most alpha).
+	flaws, mosty concerning mmc read / writes with external SDcard).
 
 The flaws:
 1) the version is completely unsupported by Xenomai or IPIPE teams! Please
