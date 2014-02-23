@@ -67,3 +67,9 @@ FAILURE rt\_task\_body:102: rt\_mutex\_acquire returned 0 instead of -4 - Succes
 therefore I'm not sure about rt\_mutex handling quality at all.
 
 6) loadig xeno\_klat can cause immidiate system freeze
+
+In directory configs/ are stored config files for kernel rebuild. The ones
+don't include all possible driver configurations, but include some debugging
+options for ipipe / xenomai, also for some am335x peripherals.
+
+In directory tests/ xenomai test results are stored.
